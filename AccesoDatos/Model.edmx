@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LibreriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="IDLibro" />
+          </Key>
+          <Property Name="IDLibro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Autor" Type="varchar" MaxLength="100" />
+          <Property Name="TituloLibro" Type="varchar" MaxLength="100" />
+          <Property Name="Anio" Type="int" />
+          <Property Name="Editorial" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Function Name="sp_AgregaLibro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Autor" Type="varchar" Mode="In" />
+          <Parameter Name="TituloLibro" Type="varchar" Mode="In" />
+          <Parameter Name="Anio" Type="int" Mode="In" />
+          <Parameter Name="Editorial" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_BorrarLibroXAutor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Autor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_BorrarLibroXEditorial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Editorial" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ConsultaXAnio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Anio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ConsultaXAutor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Autor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ConsultaXAutorFecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Autor" Type="varchar" Mode="In" />
+          <Parameter Name="Fecha" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ConsultaXEditorial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Editorial" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_ConsultaXLibro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TituloLibro" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="LibreriaModelStoreContainer">
+          <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibreriaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Libro">
+          <Key>
+            <PropertyRef Name="IDLibro" />
+          </Key>
+          <Property Name="IDLibro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Autor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TituloLibro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Anio" Type="Int32" />
+          <Property Name="Editorial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="LibreriaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Libro" EntityType="Self.Libro" />
+          <FunctionImport Name="sp_AgregaLibro">
+            <Parameter Name="Autor" Mode="In" Type="String" />
+            <Parameter Name="TituloLibro" Mode="In" Type="String" />
+            <Parameter Name="Anio" Mode="In" Type="Int32" />
+            <Parameter Name="Editorial" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_BorrarLibroXAutor">
+            <Parameter Name="Autor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_BorrarLibroXEditorial">
+            <Parameter Name="Editorial" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ConsultaXAnio" ReturnType="Collection(LibreriaModel.sp_ConsultaXAnio_Result)">
+            <Parameter Name="Anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ConsultaXAutor" ReturnType="Collection(LibreriaModel.sp_ConsultaXAutor_Result)">
+            <Parameter Name="Autor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ConsultaXAutorFecha" ReturnType="Collection(LibreriaModel.sp_ConsultaXAutorFecha_Result)">
+            <Parameter Name="Autor" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ConsultaXEditorial" ReturnType="Collection(LibreriaModel.sp_ConsultaXEditorial_Result)">
+            <Parameter Name="Editorial" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ConsultaXLibro" ReturnType="Collection(LibreriaModel.sp_ConsultaXLibro_Result)">
+            <Parameter Name="TituloLibro" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_ConsultaXAnio_Result">
+          <Property Type="Int32" Name="IDLibro" Nullable="false" />
+          <Property Type="String" Name="Autor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TituloLibro" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Anio" Nullable="true" />
+          <Property Type="String" Name="Editorial" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_ConsultaXAutor_Result">
+          <Property Type="Int32" Name="IDLibro" Nullable="false" />
+          <Property Type="String" Name="Autor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TituloLibro" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Anio" Nullable="true" />
+          <Property Type="String" Name="Editorial" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_ConsultaXAutorFecha_Result">
+          <Property Type="Int32" Name="IDLibro" Nullable="false" />
+          <Property Type="String" Name="Autor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TituloLibro" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Anio" Nullable="true" />
+          <Property Type="String" Name="Editorial" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_ConsultaXEditorial_Result">
+          <Property Type="Int32" Name="IDLibro" Nullable="false" />
+          <Property Type="String" Name="Autor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TituloLibro" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Anio" Nullable="true" />
+          <Property Type="String" Name="Editorial" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="sp_ConsultaXLibro_Result">
+          <Property Type="Int32" Name="IDLibro" Nullable="false" />
+          <Property Type="String" Name="Autor" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TituloLibro" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Anio" Nullable="true" />
+          <Property Type="String" Name="Editorial" Nullable="true" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibreriaModelStoreContainer" CdmEntityContainer="LibreriaEntities1">
+          <EntitySetMapping Name="Libro">
+            <EntityTypeMapping TypeName="LibreriaModel.Libro">
+              <MappingFragment StoreEntitySet="Libro">
+                <ScalarProperty Name="IDLibro" ColumnName="IDLibro" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="TituloLibro" ColumnName="TituloLibro" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_AgregaLibro" FunctionName="LibreriaModel.Store.sp_AgregaLibro" />
+          <FunctionImportMapping FunctionImportName="sp_BorrarLibroXAutor" FunctionName="LibreriaModel.Store.sp_BorrarLibroXAutor" />
+          <FunctionImportMapping FunctionImportName="sp_BorrarLibroXEditorial" FunctionName="LibreriaModel.Store.sp_BorrarLibroXEditorial" />
+          <FunctionImportMapping FunctionImportName="sp_ConsultaXAnio" FunctionName="LibreriaModel.Store.sp_ConsultaXAnio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LibreriaModel.sp_ConsultaXAnio_Result">
+                <ScalarProperty Name="IDLibro" ColumnName="IDLibro" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="TituloLibro" ColumnName="TituloLibro" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ConsultaXAutor" FunctionName="LibreriaModel.Store.sp_ConsultaXAutor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LibreriaModel.sp_ConsultaXAutor_Result">
+                <ScalarProperty Name="IDLibro" ColumnName="IDLibro" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="TituloLibro" ColumnName="TituloLibro" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ConsultaXAutorFecha" FunctionName="LibreriaModel.Store.sp_ConsultaXAutorFecha">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LibreriaModel.sp_ConsultaXAutorFecha_Result">
+                <ScalarProperty Name="IDLibro" ColumnName="IDLibro" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="TituloLibro" ColumnName="TituloLibro" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ConsultaXEditorial" FunctionName="LibreriaModel.Store.sp_ConsultaXEditorial">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LibreriaModel.sp_ConsultaXEditorial_Result">
+                <ScalarProperty Name="IDLibro" ColumnName="IDLibro" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="TituloLibro" ColumnName="TituloLibro" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_ConsultaXLibro" FunctionName="LibreriaModel.Store.sp_ConsultaXLibro">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LibreriaModel.sp_ConsultaXLibro_Result">
+                <ScalarProperty Name="IDLibro" ColumnName="IDLibro" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="TituloLibro" ColumnName="TituloLibro" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Editorial" ColumnName="Editorial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
